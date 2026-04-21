@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --alabaster-grey: 163 15% 91%;
+    --honeydew:       92 42% 91%;
+    --platinum:       210 10% 96%;
+    --light-bronze:   25 66% 70%;
+    --lavender-grey:  248 17% 55%;
+    --shadow-grey:    231 9% 16%;
+
+    --background:           0 0% 100%;
+    --foreground:           231 9% 16%;
+    --card:                 0 0% 100%;
+    --card-foreground:      231 9% 16%;
+    --popover:              0 0% 100%;
+    --popover-foreground:   231 9% 16%;
+    --primary:              248 17% 55%;
+    --primary-foreground:   0 0% 100%;
+    --secondary:            163 15% 91%;
+    --secondary-foreground: 231 9% 16%;
+    --muted:                210 10% 96%;
+    --muted-foreground:     231 9% 42%;
+    --accent:               25 66% 70%;
+    --accent-foreground:    0 0% 100%;
+    --destructive:          0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border:               163 15% 85%;
+    --input:                163 15% 85%;
+    --ring:                 248 17% 55%;
+    --radius:               0.625rem;
+    --sidebar:              231 9% 16%;
+    --sidebar-foreground:   163 15% 91%;
+    --sidebar-border:       231 9% 22%;
+    --sidebar-accent:       248 17% 55%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-muted:        231 9% 25%;
+    --sidebar-muted-foreground: 163 15% 60%;
+  }
+}
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1, h2, h3, h4, h5, h6 { @apply font-semibold tracking-tight; }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fade-in 0.25s ease-out both;
+  }
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-slide-in {
+    animation: slide-in 0.25s ease-out both;
+  }
+  @keyframes slide-in {
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(0); }
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar       { width: 4px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 2px;
+  }
+  .status-open      { @apply bg-emerald-100 text-emerald-700 border border-emerald-200; }
+  .status-closed    { @apply bg-red-100 text-red-700 border border-red-200; }
+  .status-completed { @apply bg-sky-100 text-sky-700 border border-sky-200; }
+  .status-pending   { @apply bg-amber-100 text-amber-700 border border-amber-200; }
+  .status-accepted  { @apply bg-emerald-100 text-emerald-700 border border-emerald-200; }
+  .status-rejected  { @apply bg-red-100 text-red-700 border border-red-200; }
+}
