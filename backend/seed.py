@@ -1,12 +1,16 @@
 """
 Script de seed : peuple la base de données avec des données de test.
 
-Comptes créés :
-  admin@univ.cm     / admin123      (admin)
-  teacher@univ.cm   / password123   (teacher)
-  teacher2@univ.cm  / password123   (teacher)
-  student@univ.cm   / password123   (student)
-  student2@univ.cm  / password123   (student)
+NOTE : L'inscription publique est désactivée.
+       Tous les comptes sont gérés exclusivement par l'administrateur
+       via l'interface web ou l'API (POST /api/v1/admin/users).
+
+Comptes créés par ce script :
+  admin@univ.cm     / admin123      → Administrateur
+  teacher@univ.cm   / password123   → Enseignant
+  teacher2@univ.cm  / password123   → Enseignant
+  student@univ.cm   / password123   → Étudiant
+  student2@univ.cm  / password123   → Étudiant
 
 Lancer avec :
   python seed.py
@@ -18,7 +22,11 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from app.core.database import SessionLocal, create_tables
 from app.core.security import hash_password
-from app.models.models import Application, ApplicationStatus, Project, ProjectStatus, User, UserRole
+from app.models.models import (
+    Application, ApplicationStatus,
+    Project, ProjectStatus,
+    User, UserRole,
+)
 
 
 def seed() -> None:
@@ -28,10 +36,11 @@ def seed() -> None:
     try:
         # Éviter les doublons
         if db.query(User).count() > 0:
-            print("La base de données contient déjà des données. Seed ignoré.")
+            print("⚠️  La base de données contient déjà des données. Seed ignoré.")
+            print("   Supprimez le fichier projet_univ.db pour recommencer.")
             return
 
-        # ── Utilisateurs ─────────────────────────────
+        # ── Utilisateurs ──────────────────────────────────────────
         admin = User(
             email="admin@univ.cm",
             full_name="Administrateur Système",
@@ -65,12 +74,10 @@ def seed() -> None:
 
         db.add_all([admin, teacher, teacher2, student, student2])
         db.commit()
-        db.refresh(teacher)
-        db.refresh(teacher2)
-        db.refresh(student)
-        db.refresh(student2)
+        for u in [admin, teacher, teacher2, student, student2]:
+            db.refresh(u)
 
-        # ── Projets ──────────────────────────────────
+        # ── Projets ───────────────────────────────────────────────
         p1 = Project(
             title="Système de détection de fraude par IA",
             description=(
@@ -96,7 +103,7 @@ def seed() -> None:
             status=ProjectStatus.OPEN,
         )
         p3 = Project(
-            title="Plateforme e-learning pour lycées",
+            title="Plateforme e-learning pour lycées ruraux",
             description=(
                 "Création d'une plateforme web de cours en ligne pour les lycéens "
                 "des zones rurales du Cameroun, avec gestion hors-ligne des contenus."
@@ -120,10 +127,10 @@ def seed() -> None:
 
         db.add_all([p1, p2, p3, p4])
         db.commit()
-        db.refresh(p1)
-        db.refresh(p3)
+        for p in [p1, p2, p3, p4]:
+            db.refresh(p)
 
-        # ── Candidatures ─────────────────────────────
+        # ── Candidatures ──────────────────────────────────────────
         app1 = Application(
             student_id=student.id,
             project_id=p1.id,
@@ -160,12 +167,18 @@ def seed() -> None:
         db.add_all([app1, app2, app3])
         db.commit()
 
-        print("✅ Seed terminé avec succès !")
-        print("   admin@univ.cm     / admin123")
-        print("   teacher@univ.cm   / password123")
-        print("   teacher2@univ.cm  / password123")
-        print("   student@univ.cm   / password123")
-        print("   student2@univ.cm  / password123")
+        print("\n✅  Seed terminé avec succès !")
+        print("─" * 50)
+        print("  COMPTES CRÉÉS (par l'administrateur)")
+        print("─" * 50)
+        print("  admin@univ.cm     / admin123      → Administrateur")
+        print("  teacher@univ.cm   / password123   → Enseignant")
+        print("  teacher2@univ.cm  / password123   → Enseignant")
+        print("  student@univ.cm   / password123   → Étudiant")
+        print("  student2@univ.cm  / password123   → Étudiant")
+        print("─" * 50)
+        print("  4 projets · 3 candidatures créés")
+        print()
 
     except Exception as e:
         db.rollback()

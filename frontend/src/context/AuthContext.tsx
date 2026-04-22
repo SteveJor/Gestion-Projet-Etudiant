@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { TOKEN_KEY } from "@/config/constants";
 import { authService } from "@/services/auth.service";
-import type { LoginPayload, RegisterPayload, User } from "@/types";
+import type { LoginPayload, User } from "@/types";
 
 // ─────────────────────────────────────────────
 // Types
@@ -20,7 +20,6 @@ interface AuthContextValue {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (payload: LoginPayload) => Promise<void>;
-  register: (payload: RegisterPayload) => Promise<User>;
   logout: () => void;
 }
 
@@ -31,19 +30,24 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(
+  const [user, setUser]       = useState<User | null>(null);
+  const [token, setToken]     = useState<string | null>(
     () => localStorage.getItem(TOKEN_KEY)
   );
   const [isLoading, setIsLoading] = useState(true);
 
-  // Rehydratation au démarrage : si token présent → fetch /me
+  /**
+   * Rehydratation au démarrage.
+   * Si un token est présent en localStorage, on appelle /auth/me
+   * pour récupérer le profil sans redemander les identifiants.
+   */
   useEffect(() => {
     if (token) {
       authService
         .getMe()
         .then(setUser)
         .catch(() => {
+          // Token expiré ou invalide : on nettoie
           localStorage.removeItem(TOKEN_KEY);
           setToken(null);
         })
@@ -61,10 +65,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(me);
   }, []);
 
-  const register = useCallback(async (payload: RegisterPayload) => {
-    return authService.register(payload);
-  }, []);
-
   const logout = useCallback(() => {
     localStorage.removeItem(TOKEN_KEY);
     setToken(null);
@@ -78,10 +78,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       isAuthenticated: !!user,
       isLoading,
       login,
-      register,
       logout,
     }),
-    [user, token, isLoading, login, register, logout]
+    [user, token, isLoading, login, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -93,6 +92,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 export function useAuth(): AuthContextValue {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth doit être utilisé à l'intérieur de <AuthProvider>");
+  if (!ctx) {
+    throw new Error("useAuth doit être utilisé à l'intérieur de <AuthProvider>");
+  }
   return ctx;
 }

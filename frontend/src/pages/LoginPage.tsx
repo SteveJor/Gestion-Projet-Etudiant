@@ -89,7 +89,7 @@ export default function LoginPage() {
                   />
                 </div>
 
-                <div className="space-y-1.5">
+                <div className="space-y-1.5 my-5">
                   <Label htmlFor="password" className={"text-md"}>Mot de passe</Label>
                   <div className="relative">
                     <Input
@@ -107,17 +107,10 @@ export default function LoginPage() {
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full" loading={loading}>
+                <Button type="submit" className="w-full mt-5" loading={loading}>
                   Se connecter
                 </Button>
               </form>
-
-              <p className="mt-5 text-center text-sm text-muted-foreground">
-                Pas encore de compte ?{" "}
-                <Link to="/register" className="font-medium text-primary hover:underline">
-                  S'inscrire
-                </Link>
-              </p>
 
               {/* Quick test accounts hint */}
               {/* <div className="mt-4 rounded-lg bg-muted/60 p-3 text-xs text-muted-foreground space-y-0.5">

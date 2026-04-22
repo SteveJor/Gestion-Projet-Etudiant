@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard, FolderOpen, PlusCircle, FileText,
-  LogOut, GraduationCap, X,
+  LogOut, GraduationCap, X, Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
@@ -25,6 +25,7 @@ const teacherNav = [
 const adminNav = [
   { to: "/dashboard", label: "Tableau de bord", icon: LayoutDashboard },
   { to: "/projects",  label: "Tous les projets", icon: FolderOpen },
+  { to: "/admin/users", label: "Gestion utilisateurs", icon: Users },
 ];
 
 interface SidebarProps {

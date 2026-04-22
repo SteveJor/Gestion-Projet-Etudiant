@@ -1,31 +1,19 @@
-"""Endpoints d'authentification : inscription, connexion, profil."""
-from fastapi import APIRouter, Depends, status
+"""
+Endpoints d'authentification : connexion et profil.
+NOTE : L'inscription publique est désactivée.
+       Seul l'administrateur peut créer des comptes (via /api/v1/admin/users).
+"""
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.api.v1.deps import get_current_user
 from app.core.database import get_db
 from app.models.models import User
 from app.schemas.common import Token
-from app.schemas.user import UserCreate, UserLogin, UserMe, UserOut
+from app.schemas.user import UserLogin, UserMe
 from app.services.auth_service import auth_service
 
 router = APIRouter(prefix="/auth", tags=["Authentification"])
-
-
-@router.post(
-    "/register",
-    response_model=UserOut,
-    status_code=status.HTTP_201_CREATED,
-    summary="Inscription d'un nouvel utilisateur",
-)
-def register(payload: UserCreate, db: Session = Depends(get_db)) -> User:
-    """
-    Crée un compte utilisateur.
-    - **email** : doit être unique
-    - **password** : minimum 6 caractères
-    - **role** : `student` ou `teacher`
-    """
-    return auth_service.register(db, payload)
 
 
 @router.post(
@@ -36,7 +24,7 @@ def register(payload: UserCreate, db: Session = Depends(get_db)) -> User:
 def login(payload: UserLogin, db: Session = Depends(get_db)) -> Token:
     """
     Authentifie l'utilisateur et retourne un token Bearer JWT.
-    Inclure ce token dans l'en-tête `Authorization: Bearer <token>`.
+    Les comptes sont créés exclusivement par l'administrateur.
     """
     return auth_service.login(db, payload)
 

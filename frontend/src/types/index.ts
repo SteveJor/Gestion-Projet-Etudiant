@@ -147,3 +147,26 @@ export interface StudentStats {
 export interface ApiError {
   detail: string;
 }
+
+// ─────────────────────────────────────────────
+// Admin
+// ─────────────────────────────────────────────
+
+export interface UserCreatePayload {
+  email: string;
+  full_name: string;
+  password: string;
+  role: UserRole;
+}
+
+export interface UserUpdatePayload {
+  email?: string;
+  full_name?: string;
+  password?: string;
+  role?: UserRole;
+}
+
+export interface UserListResponse {
+  items: User[];
+  total: number;
+}

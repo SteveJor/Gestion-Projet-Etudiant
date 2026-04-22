@@ -10,7 +10,7 @@ interface EmptyStateProps {
 export function EmptyState({ icon: Icon, title, description, action }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center  p-10 text-center">
-        <img src={"images/empty.png"} className={"h-56"}/>
+        <img src={"/images/empty.png"} className={"h-56"}/>
 
         <p className="text-lg font-semibold text-foreground/80">{title}</p>
       {description && <p className="mt-1 text-mg text-muted-foreground max-w-xs">{description}</p>}
