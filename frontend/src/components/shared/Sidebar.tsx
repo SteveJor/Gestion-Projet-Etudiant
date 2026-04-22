@@ -20,7 +20,6 @@ const teacherNav = [
   { to: "/dashboard",         label: "Tableau de bord",  icon: LayoutDashboard },
   { to: "/projects",          label: "Projets ouverts",  icon: FolderOpen },
   { to: "/my-projects",       label: "Mes projets",      icon: FileText },
-  { to: "/projects/create",   label: "Nouveau projet",   icon: PlusCircle },
 ];
 
 const adminNav = [
@@ -57,8 +56,8 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
       <aside
         className={cn(
           /* base */
-          "fixed top-0 left-0 z-40 h-screen w-60 flex flex-col",
-          "bg-sidebar text-sidebar-foreground shadow-sidebar",
+          "fixed top-0 left-0 z-40 h-screen w-72 flex flex-col",
+          " bg-white shadow-lg",
           /* mobile: slide in/out */
           "transition-transform duration-300 ease-out",
           "lg:translate-x-0 lg:static lg:z-auto",
@@ -68,9 +67,9 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
         {/* ── Logo ─────────────────────────── */}
         <div className="flex items-center justify-between px-5 py-5">
           <div className="flex items-center gap-2.5">
-                        <img src="/logo/logo.png" style={{"height":60}}/>
+                        <img src="/logo/logo.png" style={{"height":50}}/>
 
-            <span className="text-l font-bold tracking-tight text-white">CampusFlow</span>
+            <span className="text-xl font-bold tracking-tight ">CampusFlow</span>
           </div>
           {/* Mobile close */}
           <button onClick={onClose} className="lg:hidden text-sidebar-foreground/60 hover:text-white">
@@ -78,7 +77,6 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
           </button>
         </div>
 
-        <Separator className="bg-sidebar-border" />
 
         {/* ── Nav ──────────────────────────── */}
         <nav className="flex-1 overflow-y-auto scrollbar-thin px-3 py-4 space-y-0.5">
@@ -90,36 +88,35 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
                 to={to}
                 onClick={onClose}
                 className={cn(
-                  "flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors duration-150",
+                  "flex items-center gap-3 font-bold rounded-md px-3 py-2.5 text-md transition-colors duration-150",
                   active
-                    ? "bg-sidebar-accent text-white"
-                    : "text-sidebar-foreground/70 hover:bg-sidebar-muted hover:text-white"
+                    ? "bg-sidebar text-white"
+                    : "text-sidebar/80  hover:bg-sidebar/50 hover:text-white"
                 )}
               >
-                <Icon className="size-4 shrink-0" />
+                <Icon className="size-5 shrink-0" />
                 {label}
               </Link>
             );
           })}
         </nav>
 
-        <Separator className="bg-sidebar-border" />
 
         {/* ── User footer ─────────────────── */}
         <div className="p-4 space-y-3">
           <div className="flex items-center gap-3">
-            <Avatar className="size-8">
+            <Avatar className="size-8 text-sidebar">
               <AvatarFallback>{initials}</AvatarFallback>
             </Avatar>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold text-white truncate">{user?.full_name}</p>
-              <p className="text-[10px] text-sidebar-muted-foreground capitalize">{user?.role}</p>
+              <p className="text-md font-semibold text-sidebar truncate">{user?.full_name}</p>
+              <p className="text-sm text-sidebar/80 capitalize">{user?.role}</p>
             </div>
           </div>
           <Button
             variant="ghost"
             size="sm"
-            className="w-full justify-start gap-2 text-sidebar-foreground/60 hover:text-white hover:bg-sidebar-muted"
+            className="w-full text-md justify-start gap-2 py-5 text-sidebar/80 hover:text-white hover:bg-sidebar-muted"
             onClick={logout}
           >
             <LogOut className="size-4" />

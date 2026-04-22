@@ -62,7 +62,7 @@ export default function ProjectsPage() {
       {/* Header */}
       <div>
         <h2 className="text-xl font-bold">Projets disponibles</h2>
-        <p className="text-sm text-muted-foreground mt-0.5">
+        <p className="text-md text-muted-foreground mt-0.5">
           {data ? `${data.total} projet${data.total !== 1 ? "s" : ""} ouvert${data.total !== 1 ? "s" : ""}` : "Chargement…"}
         </p>
       </div>
@@ -70,24 +70,24 @@ export default function ProjectsPage() {
       {/* Filter bar */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-5 text-muted-foreground" />
           <Input
             placeholder="Rechercher par titre…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 bg-white"
+            className="px-9 py-6 text-md bg-white"
           />
           {search && (
             <button onClick={() => setSearch("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
-              <X className="size-3.5" />
+              className="absolute  right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+              <X className="size-4.5" />
             </button>
           )}
         </div>
 
         <div className="flex gap-2">
-          <Select value={domain} onValueChange={(v) => { setDomain(v === "all" ? "" : v); setPage(1); }}>
-            <SelectTrigger className="w-48 bg-white">
+          <Select  value={domain} onValueChange={(v) => { setDomain(v === "all" ? "" : v); setPage(1); }}>
+            <SelectTrigger className="w-48 text-md px-9 py-6 bg-white">
               <SlidersHorizontal className="size-3.5 text-muted-foreground mr-1" />
               <SelectValue placeholder="Domaine" />
             </SelectTrigger>
@@ -109,18 +109,18 @@ export default function ProjectsPage() {
       {hasFilters && (
         <div className="flex flex-wrap gap-2">
           {debouncedSearch && (
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 text-primary text-xs px-3 py-1 font-medium">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 text-primary text-md px-3 py-1 font-medium">
               "{debouncedSearch}"
               <button onClick={() => { setSearch(""); setDebouncedSearch(""); setPage(1); }}>
-                <X className="size-3" />
+                <X className="size-4" />
               </button>
             </span>
           )}
           {domain && (
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-bronze/15 text-amber-800 text-xs px-3 py-1 font-medium">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-bronze/15 text-amber-800 text-md px-3 py-1 font-medium">
               {domain}
               <button onClick={() => { setDomain(""); setPage(1); }}>
-                <X className="size-3" />
+                <X className="size-4" />
               </button>
             </span>
           )}
@@ -135,7 +135,7 @@ export default function ProjectsPage() {
           icon={Search}
           title="Aucun projet trouvé"
           description={hasFilters ? "Essayez d'autres critères de recherche." : "Aucun projet ouvert pour le moment."}
-          action={hasFilters ? <Button variant="outline" size="sm" onClick={clearFilters}>Effacer les filtres</Button> : undefined}
+          action={hasFilters ? <Button variant="outline" size="lg" onClick={clearFilters}>Effacer les filtres</Button> : undefined}
         />
       ) : (
         <>
@@ -144,14 +144,14 @@ export default function ProjectsPage() {
           </div>
 
           {/* Pagination */}
-          {data.total_pages > 1 && (
+          {data.total_pages > 0 && (
             <div className="flex items-center justify-between pt-2">
-              <p className="text-xs text-muted-foreground">
+              <p className="text-md text-muted-foreground">
                 Page {data.page} sur {data.total_pages}
               </p>
               <div className="flex gap-2">
                 <Button
-                  variant="outline" size="sm"
+                  variant="outline" size="lg"
                   disabled={page === 1}
                   onClick={() => setPage((p) => p - 1)}
                 >
@@ -162,7 +162,7 @@ export default function ProjectsPage() {
                   {Array.from({ length: data.total_pages }, (_, i) => i + 1)
                     .filter((n) => Math.abs(n - page) <= 2)
                     .map((n) => (
-                      <Button key={n} size="sm"
+                      <Button key={n} size="lg"
                         variant={n === page ? "default" : "outline"}
                         onClick={() => setPage(n)}
                         className="w-8 p-0"
@@ -172,7 +172,7 @@ export default function ProjectsPage() {
                     ))}
                 </div>
                 <Button
-                  variant="outline" size="sm"
+                  variant="outline" size="lg"
                   disabled={page === data.total_pages}
                   onClick={() => setPage((p) => p + 1)}
                 >

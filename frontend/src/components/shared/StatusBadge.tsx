@@ -16,7 +16,7 @@ const applicationStatusConfig: Record<ApplicationStatus, { label: string; classN
 export function ProjectStatusBadge({ status }: { status: ProjectStatus }) {
   const cfg = projectStatusConfig[status] ?? { label: status, className: "" };
   return (
-    <span className={cn("inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold", cfg.className)}>
+    <span className={cn("inline-flex items-center rounded-full px-2.5 py-0.5 text-sm font-semibold", cfg.className)}>
       {cfg.label}
     </span>
   );
@@ -25,7 +25,7 @@ export function ProjectStatusBadge({ status }: { status: ProjectStatus }) {
 export function ApplicationStatusBadge({ status }: { status: ApplicationStatus }) {
   const cfg = applicationStatusConfig[status] ?? { label: status, className: "" };
   return (
-    <span className={cn("inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold", cfg.className)}>
+    <span className={cn("inline-flex items-center rounded-full px-2.5 py-0.5 text-md font-semibold", cfg.className)}>
       {cfg.label}
     </span>
   );

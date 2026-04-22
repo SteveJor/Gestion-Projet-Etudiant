@@ -24,66 +24,59 @@ export default function ProjectCard({ project, className }: ProjectCardProps) {
         className
       )}
     >
-      {/* Color accent bar inspired by screenshots */}
-      <div className="absolute top-0 left-0 w-full h-0.5 rounded-t-xl overflow-hidden">
-        <div className="flex h-full">
-          <div className="flex-1 bg-primary" />
-          <div className="flex-1 bg-brand-bronze" />
-          <div className="flex-1 bg-emerald-400" />
-        </div>
-      </div>
+
 
       {/* Header */}
       <div className="flex items-start justify-between gap-3 mb-3">
-        <h3 className="text-sm font-semibold text-foreground leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+        <h3 className="text-lg font-semibold text-foreground leading-snug line-clamp-2 group-hover:text-primary transition-colors">
           {project.title}
         </h3>
         <ProjectStatusBadge status={project.status} />
       </div>
 
       {/* Description */}
-      <p className="text-xs text-muted-foreground line-clamp-2 mb-4 flex-1">
+      <p className="text-md text-primary  line-clamp-3 mb-4 flex-1">
         {project.description}
       </p>
 
       {/* Meta */}
       <div className="space-y-1.5 mb-4">
         {project.domain && (
-          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <Tag className="size-3 text-brand-bronze" />
-            <span>{project.domain}</span>
+          <div className="flex items-center gap-1.5 text-sm  text-muted-foreground">
+            <Tag className="size-5 text-brand-bronze" />
+            <span className={" text-sidebar"}>{project.domain}</span>
           </div>
         )}
-        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-          <Users className="size-3 text-primary" />
-          <span>{project.max_students} étudiant{project.max_students > 1 ? "s" : ""} max</span>
+        <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+          <Users className="size-5 text-primary" />
+          <span className={" text-sidebar"}>{project.max_students} étudiant{project.max_students > 1 ? "s" : ""} max</span>
         </div>
-        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-          <Calendar className="size-3 text-muted-foreground/70" />
-          <span>{formatDate(project.created_at)}</span>
+        <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+          <Calendar className="size-5 text-muted-foreground/70" />
+          <span className={" text-sidebar"}>{formatDate(project.created_at)}</span>
         </div>
       </div>
 
       {/* Footer */}
       <div className="flex items-center justify-between pt-3 border-t border-border">
         <div className="flex items-center gap-1.5">
-          <div className="size-5 rounded-full bg-primary/15 flex items-center justify-center">
-            <span className="text-[9px] font-bold text-primary">
+          <div className="size-10 rounded-full bg-primary/15 flex items-center justify-center">
+            <span className="text-sm font-bold text-primary">
               {project.teacher_name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()}
             </span>
           </div>
-          <span className="text-xs text-muted-foreground truncate max-w-[100px]">{project.teacher_name}</span>
+          <span className="text-sm text-muted-foreground truncate max-w-[200px]">{project.teacher_name}</span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="flex items-center gap-1 text-xs text-muted-foreground">
-            <FileText className="size-3" />
+          <span className="flex items-center gap-1 text-sm text-muted-foreground">
+            <FileText className="size-5" />
             {project.applications_count}
           </span>
           <Link
             to={`/projects/${project.id}`}
-            className="flex items-center gap-1 text-xs font-medium text-primary hover:underline"
+            className="flex items-center text-accent gap-1 text-sm font-medium text-primary hover:underline"
           >
-            Voir <ArrowRight className="size-3" />
+            Voir <ArrowRight className="size-5" />
           </Link>
         </div>
       </div>

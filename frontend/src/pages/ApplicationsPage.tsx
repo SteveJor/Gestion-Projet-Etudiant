@@ -31,11 +31,11 @@ export default function ApplicationsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-bold">Mes candidatures</h2>
-          <p className="text-sm text-muted-foreground mt-0.5">
+          <p className="text-md text-muted-foreground mt-0.5">
             {applications.length} candidature{applications.length !== 1 ? "s" : ""} soumise{applications.length !== 1 ? "s" : ""}
           </p>
         </div>
-        <Button asChild variant="outline" size="sm">
+        <Button asChild variant="outline" size="lg">
           <Link to="/projects">
             <FolderOpen className="size-4" /> Parcourir les projets
           </Link>
@@ -44,7 +44,7 @@ export default function ApplicationsPage() {
 
       {/* Summary chips */}
       {applications.length > 0 && (
-        <div className="flex gap-3 flex-wrap">
+        <div className="flex justify-center gap-3 flex-wrap">
           <Chip color="amber"   label="En attente" count={byStatus.pending.length} />
           <Chip color="emerald" label="Acceptées"  count={byStatus.accepted.length} />
           <Chip color="red"     label="Refusées"   count={byStatus.rejected.length} />
@@ -69,7 +69,7 @@ export default function ApplicationsPage() {
               <CardContent className="p-0">
                 <div className="flex items-center gap-4 p-4">
                   {/* Status color dot */}
-                  <div className={`size-2 rounded-full shrink-0 ${
+                  <div className={`size-3 rounded-full shrink-0 ${
                     app.status === "accepted" ? "bg-emerald-500" :
                     app.status === "rejected" ? "bg-red-500" : "bg-amber-400"
                   }`} />
@@ -78,12 +78,12 @@ export default function ApplicationsPage() {
                   <div className="flex-1 min-w-0">
                     <Link
                       to={`/projects/${app.project_id}`}
-                      className="text-sm font-semibold hover:text-primary transition-colors"
+                      className="text-lg font-semibold hover:text-primary transition-colors"
                     >
                       Projet #{app.project_id}
                     </Link>
                     <div className="flex items-center gap-2 mt-0.5">
-                      <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1 text-md text-muted-foreground">
                         <Calendar className="size-3" />
                         {new Date(app.applied_at).toLocaleDateString("fr-FR", {
                           day: "2-digit", month: "long", year: "numeric",
@@ -92,27 +92,23 @@ export default function ApplicationsPage() {
                     </div>
                   </div>
 
-                  {/* Motivation preview */}
-                  <p className="hidden md:block text-xs text-muted-foreground max-w-xs line-clamp-1 flex-1">
-                    {app.motivation}
-                  </p>
 
                   {/* Status + link */}
                   <div className="flex items-center gap-3 shrink-0">
                     <ApplicationStatusBadge status={app.status} />
                     <Link
                       to={`/projects/${app.project_id}`}
-                      className="text-xs text-primary hover:underline flex items-center gap-1"
+                      className="text-md text-primary hover:underline flex items-center gap-1"
                     >
-                      Voir <ArrowRight className="size-3" />
+                      Voir <ArrowRight className="size-5 text-primary" />
                     </Link>
                   </div>
                 </div>
 
                 {/* Motivation expandable */}
-                <div className="border-t border-border px-4 py-2.5 bg-muted/20">
-                  <p className="text-xs text-muted-foreground">
-                    <span className="font-medium text-foreground/60">Motivation : </span>
+                <div className="border-t rounded-b-xl border-border px-4 py-2.5 bg-primary">
+                  <p className="text-md text-primary-foreground/80">
+                    <span className="font-medium text-white">Motivation : </span>
                     {app.motivation}
                   </p>
                 </div>
@@ -127,12 +123,12 @@ export default function ApplicationsPage() {
 
 function Chip({ color, label, count }: { color: string; label: string; count: number }) {
   const styles: Record<string, string> = {
-    amber:   "bg-amber-100 text-amber-800",
-    emerald: "bg-emerald-100 text-emerald-800",
-    red:     "bg-red-100 text-red-800",
+    amber:   "text-amber-800",
+    emerald: "text-emerald-800",
+    red:     "text-red-800",
   };
   return (
-    <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${styles[color] ?? ""}`}>
+    <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-md font-semibold ${styles[color] ?? ""}`}>
       <span className="font-bold">{count}</span> {label}
     </span>
   );

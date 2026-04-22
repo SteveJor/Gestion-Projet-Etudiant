@@ -48,13 +48,13 @@ export default function MyProjectsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-bold">Mes projets</h2>
-          <p className="text-sm text-muted-foreground mt-0.5">
+          <p className="text-md text-muted-foreground mt-0.5">
             {projects.length} projet{projects.length !== 1 ? "s" : ""} créé{projects.length !== 1 ? "s" : ""}
           </p>
         </div>
-        <Button asChild size="sm">
+        <Button asChild size="lg">
           <Link to="/projects/create">
-            <PlusCircle className="size-4" /> Nouveau projet
+            <PlusCircle className="size-5" /> Nouveau projet
           </Link>
         </Button>
       </div>
@@ -65,7 +65,7 @@ export default function MyProjectsPage() {
           title="Aucun projet créé"
           description="Proposez votre premier sujet de recherche aux étudiants."
           action={
-            <Button asChild size="sm">
+            <Button asChild size="lg">
               <Link to="/projects/create">Créer un projet</Link>
             </Button>
           }
@@ -78,7 +78,7 @@ export default function MyProjectsPage() {
                 <div className="flex items-center gap-4 p-4">
                   {/* Color dot */}
                   <div className="size-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <span className="text-primary font-bold text-sm">
+                    <span className="text-primary font-bold text-xl">
                       {p.title.charAt(0).toUpperCase()}
                     </span>
                   </div>
@@ -86,17 +86,17 @@ export default function MyProjectsPage() {
                   {/* Info */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <p className="text-sm font-semibold truncate">{p.title}</p>
+                      <p className="text-md font-semibold truncate">{p.title}</p>
                       <ProjectStatusBadge status={p.status} />
                     </div>
-                    <div className="flex items-center gap-3 mt-0.5">
-                      <span className="text-xs text-muted-foreground flex items-center gap-1">
+                    <div className="flex items-center gap-3 mt-2">
+                      <span className="text-md text-muted-foreground flex items-center gap-1">
                         <Users className="size-3" /> {p.max_students} place{p.max_students > 1 ? "s" : ""}
                       </span>
                       {p.domain && (
-                        <span className="text-xs text-muted-foreground">· {p.domain}</span>
+                        <span className="text-md text-muted-foreground">· {p.domain}</span>
                       )}
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-md text-primary">
                         · {new Date(p.created_at).toLocaleDateString("fr-FR")}
                       </span>
                     </div>
@@ -106,30 +106,30 @@ export default function MyProjectsPage() {
                   <div className="flex items-center gap-1.5 shrink-0">
                     <Button asChild variant="ghost" size="icon" title="Voir les candidatures">
                       <Link to={`/projects/${p.id}/applications`}>
-                        <Users className="size-4" />
+                        <Users className="size-5" />
                       </Link>
                     </Button>
                     <Button asChild variant="ghost" size="icon" title="Voir le projet">
                       <Link to={`/projects/${p.id}`}>
-                        <Eye className="size-4" />
+                        <Eye className="size-5" />
                       </Link>
                     </Button>
                     <Button asChild variant="ghost" size="icon" title="Modifier">
                       <Link to={`/projects/${p.id}/edit`}>
-                        <Pencil className="size-4" />
+                        <Pencil className="size-5" />
                       </Link>
                     </Button>
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <Button variant="ghost" size="icon" title="Supprimer"
                           className="text-destructive/60 hover:text-destructive">
-                          <Trash2 className="size-4" />
+                          <Trash2 className="size-5" />
                         </Button>
                       </AlertDialogTrigger>
                       <AlertDialogContent>
                         <AlertDialogHeader>
-                          <AlertDialogTitle>Supprimer "{p.title}" ?</AlertDialogTitle>
-                          <AlertDialogDescription>
+                          <AlertDialogTitle className={"text-xl"}>Supprimer "{p.title}" ?</AlertDialogTitle>
+                          <AlertDialogDescription className={"text-md  my-2"}>
                             Toutes les candidatures associées seront également supprimées. Cette action est irréversible.
                           </AlertDialogDescription>
                         </AlertDialogHeader>

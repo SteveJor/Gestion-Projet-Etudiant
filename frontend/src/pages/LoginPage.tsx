@@ -46,13 +46,12 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex">
       {/* Left panel */}
-      <div className="hidden lg:flex lg:w-1/2 flex-col justify-evently p-10"
-        style={{ background: "linear-gradient(135deg, hsl(0, 0%, 97%) 0%, hsl(217, 12%, 87%) 100%)" }}>
-        <center><img src="/images/login_1.png" className="mt-5" style={{"height":580, "width":420}}/></center>
+      <div className="hidden login_img lg:flex lg:w-1/2 flex-col justify-end p-10"
+        >
         <div>
           <blockquote className="space-y-2">
-            <p className="text-xl font-medium leading-relaxed">
-              "La plateforme officielle de gestion des projets académiques de l'Université de Douala."
+            <p className="text-4xl font-bold text-white leading-relaxed">
+              La plateforme officielle de gestion des projets académiques.
             </p>
           </blockquote>
         </div>
@@ -64,7 +63,7 @@ export default function LoginPage() {
       </div>
 
       {/* Right panel */}
-      <div className="flex flex-1 flex-col items-center justify-center p-6 bg-brand-platinum">
+      <div className="flex flex-1 flex-col items-center justify-center p-6 " style={{ background: "linear-gradient(133deg,rgba(244, 245, 246, 1) 0%, rgba(244, 245, 246, 1) 50%, rgba(232, 242, 223, 1) 100%)"}}>
         <div className="w-full max-w-md">
           <Card className="shadow-card-hover border-0">
             <CardHeader className="pb-4">
@@ -72,7 +71,7 @@ export default function LoginPage() {
             <img src="/logo/logo.png" style={{"height":80}}/>
 <div className="mt-3 ml-2">
   <CardTitle className="text-xl">Connexion</CardTitle>
-              <CardDescription>Accédez à votre espace personnel</CardDescription>
+              <CardDescription  className="text-md">Accédez à votre espace personnel</CardDescription>
 </div>
             </div>
 
@@ -81,28 +80,29 @@ export default function LoginPage() {
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                 <div className="space-y-1.5">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email" className={"text-md"}>Email</Label>
                   <Input
                     id="email" type="email" placeholder="vous@univ.cm"
                     value={form.email} error={errors.email}
+                    className={"text-md"}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label htmlFor="password">Mot de passe</Label>
+                  <Label htmlFor="password" className={"text-md"}>Mot de passe</Label>
                   <div className="relative">
                     <Input
                       id="password" type={showPwd ? "text" : "password"}
                       placeholder="••••••" value={form.password} error={errors.password}
                       onChange={(e) => setForm({ ...form, password: e.target.value })}
-                      className="pr-10"
+                      className="pr-10 text-md "
                     />
                     <button
                       type="button" onClick={() => setShowPwd(!showPwd)}
                       className="absolute right-3 top-2.5 text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      {showPwd ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                      {showPwd ? <EyeOff className="size-4" /> : <Eye className="size-5" />}
                     </button>
                   </div>
                 </div>

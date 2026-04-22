@@ -35,8 +35,10 @@ function AdminDashboard() {
     <div className="space-y-6">
       <div>
         <h2 className="text-xl font-bold text-foreground">Vue d'ensemble</h2>
-        <p className="text-sm text-muted-foreground mt-0.5">Statistiques globales de la plateforme</p>
+        <p className="text-md text-muted-foreground mt-0.5">Statistiques globales de la plateforme</p>
       </div>
+
+      <center><img src="/images/dashboard.png" style={{"height":280}}/></center>
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <StatCard label="Utilisateurs" value={stats.total_users} icon={Users} color="lavender" />
@@ -51,9 +53,9 @@ function AdminDashboard() {
         <StatCard label="Projets terminés"   value={stats.completed_projects} icon={CheckCircle2}  color="sky"   />
       </div>
 
-      <Card>
+      <Card className={"bg-transparent"}>
         <CardHeader>
-          <CardTitle className="text-sm">Récapitulatif</CardTitle>
+          <CardTitle className="text-xl">Récapitulatif</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
@@ -64,9 +66,9 @@ function AdminDashboard() {
                 ? (stats.total_applications / stats.total_projects).toFixed(1) + " / projet"
                 : "—"],
             ].map(([label, val]) => (
-              <div key={String(label)} className="flex justify-between border-b border-border pb-2 last:border-0">
-                <span className="text-muted-foreground">{label}</span>
-                <span className="font-semibold">{val}</span>
+              <div key={String(label)} className="flex justify-between border-b border-border m-3 pb-2 last:border-0">
+                <span className="text-muted-foreground text-lg">{label}</span>
+                <span className="font-semibold text-lg">{val}</span>
               </div>
             ))}
           </div>
@@ -101,14 +103,15 @@ function TeacherDashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-bold">Mes projets</h2>
-          <p className="text-sm text-muted-foreground mt-0.5">Gérez vos sujets de recherche</p>
+          <p className="text-md text-muted-foreground mt-0.5">Gérez vos sujets de recherche</p>
         </div>
-        <Button asChild size="sm">
+        <Button asChild size="lg">
           <Link to="/projects/create">
             <PlusCircle className="size-4" /> Nouveau projet
           </Link>
         </Button>
       </div>
+      <center><img src="/images/dashboard.png" style={{"height":280}}/></center>
 
       {stats && (
         <div className="grid grid-cols-3 gap-4">
@@ -119,14 +122,14 @@ function TeacherDashboard() {
       )}
 
       {/* Recent projects */}
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between pb-3">
-          <CardTitle className="text-sm">Projets récents</CardTitle>
-          <Link to="/my-projects" className="text-xs text-primary hover:underline flex items-center gap-1">
-            Voir tout <ArrowRight className="size-3" />
+      <Card className={"bg-transparent border-0"}>
+        <CardHeader className="flex flex-row items-center justify-between pb-3 border-0">
+          <CardTitle className="text-xl">Projets récents</CardTitle>
+          <Link to="/my-projects" className="text-lg text-primary hover:underline flex items-center gap-1">
+            Voir tout <ArrowRight className="size-5" />
           </Link>
         </CardHeader>
-        <CardContent className="p-0">
+        <CardContent className="p-0 bg-white shadow rounded-2xl">
           {projects.length === 0 ? (
             <p className="text-sm text-muted-foreground px-5 pb-5">Aucun projet créé.</p>
           ) : (
@@ -134,13 +137,13 @@ function TeacherDashboard() {
               {projects.map((p) => (
                 <div key={p.id} className="flex items-center justify-between px-5 py-3 hover:bg-muted/40 transition-colors">
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">{p.title}</p>
-                    <p className="text-xs text-muted-foreground">{p.max_students} étudiant{p.max_students > 1 ? "s" : ""} max</p>
+                    <p className="text-lg font-medium truncate">{p.title}</p>
+                    <p className="text-md text-muted-foreground">{p.max_students} étudiant{p.max_students > 1 ? "s" : ""} max</p>
                   </div>
-                  <div className="flex items-center gap-3 ml-3">
+                  <div className="flex items-center gap-3 ml-5">
                     <ProjectStatusBadge status={p.status} />
-                    <Link to={`/projects/${p.id}`} className="text-xs text-primary hover:underline">
-                      Voir
+                    <Link to={`/projects/${p.id}`} className="text-md text-primary hover:underline">
+                      <ArrowRight className="size-5" />
                     </Link>
                   </div>
                 </div>
@@ -178,14 +181,15 @@ function StudentDashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-bold">Mes candidatures</h2>
-          <p className="text-sm text-muted-foreground mt-0.5">Suivez l'état de vos dossiers</p>
+          <p className="text-md text-muted-foreground mt-0.5">Suivez l'état de vos dossiers</p>
         </div>
-        <Button asChild size="sm" variant="outline">
+        <Button asChild size="lg" variant="outline">
           <Link to="/projects">
             <FolderOpen className="size-4" /> Parcourir les projets
           </Link>
         </Button>
       </div>
+      <center><img src="/images/dashboard.png" style={{"height":280}}/></center>
 
       {stats && (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -197,18 +201,18 @@ function StudentDashboard() {
       )}
 
       {/* Recent applications */}
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between pb-3">
-          <CardTitle className="text-sm">Candidatures récentes</CardTitle>
-          <Link to="/applications" className="text-xs text-primary hover:underline flex items-center gap-1">
-            Voir tout <ArrowRight className="size-3" />
+      <Card className={"bg-transparent border-0"}>
+          <CardHeader className="flex flex-row items-center justify-between pb-3 border-0">
+          <CardTitle className="text-xl">Candidatures récentes</CardTitle>
+          <Link to="/applications" className="text-md text-primary hover:underline flex items-center gap-1">
+            Voir tout <ArrowRight className="size-5" />
           </Link>
         </CardHeader>
-        <CardContent className="p-0">
+          <CardContent className="p-0 bg-white shadow rounded-2xl">
           {applications.length === 0 ? (
-            <div className="px-5 pb-5">
-              <p className="text-sm text-muted-foreground">Aucune candidature soumise.</p>
-              <Button asChild size="sm" className="mt-3">
+            <div className="px-5 m-auto pb-5">
+              <p className="text-md text-muted-foreground">Aucune candidature soumise.</p>
+              <Button asChild size="lg" className="mt-3">
                 <Link to="/projects">Découvrir les projets</Link>
               </Button>
             </div>
@@ -218,10 +222,10 @@ function StudentDashboard() {
                 <div key={a.id} className="flex items-center justify-between px-5 py-3 hover:bg-muted/40 transition-colors">
                   <div className="flex-1 min-w-0">
                     <Link to={`/projects/${a.project_id}`}
-                      className="text-sm font-medium hover:text-primary transition-colors truncate block">
+                      className="text-lg font-medium hover:text-primary transition-colors truncate block">
                       Projet #{a.project_id}
                     </Link>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-md text-muted-foreground">
                       {new Date(a.applied_at).toLocaleDateString("fr-FR")}
                     </p>
                   </div>
@@ -251,17 +255,6 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      {/* Welcome header */}
-      <div className="rounded-xl border border-border bg-gradient-to-r from-white to-brand-alabaster p-5">
-        <p className="text-xs text-muted-foreground uppercase tracking-wider font-medium mb-0.5">
-          {greeting()},
-        </p>
-        <h1 className="text-2xl font-bold text-foreground">{user?.full_name}</h1>
-        <p className="text-sm text-muted-foreground mt-0.5 capitalize">
-          {user?.role === "student" ? "Étudiant(e)" :
-           user?.role === "teacher" ? "Enseignant(e)" : "Administrateur"} · UniProjets
-        </p>
-      </div>
 
       {user?.role === "admin"   && <AdminDashboard />}
       {user?.role === "teacher" && <TeacherDashboard />}

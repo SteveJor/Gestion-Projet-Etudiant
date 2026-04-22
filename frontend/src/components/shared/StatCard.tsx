@@ -43,13 +43,11 @@ export default function StatCard({ label, value, icon: Icon, color = "lavender",
     <div className="rounded-xl border border-border bg-white p-5 shadow-card hover:shadow-card-hover transition-shadow duration-200">
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{label}</p>
+          <p className="text-md font-medium text-muted-foreground uppercase tracking-wide">{label}</p>
           <p className={cn("mt-1.5 text-3xl font-bold", c.val)}>{value}</p>
           {sublabel && <p className="mt-0.5 text-xs text-muted-foreground">{sublabel}</p>}
         </div>
-        <div className={cn("rounded-xl p-2.5", c.bg)}>
           <Icon className={cn("size-5", c.icon)} />
-        </div>
       </div>
     </div>
   );

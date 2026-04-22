@@ -49,7 +49,11 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   h1, h2, h3, h4, h5, h6 { @apply font-semibold tracking-tight; }
+
 }
+
+.login_img{
+  background: url("public/images/login_img.png") center/cover no-repeat;}
 
 @layer utilities {
   .animate-fade-in {
@@ -76,10 +80,10 @@
     background: hsl(var(--border));
     border-radius: 2px;
   }
-  .status-open      { @apply bg-emerald-100 text-emerald-700 border border-emerald-200; }
-  .status-closed    { @apply bg-red-100 text-red-700 border border-red-200; }
-  .status-completed { @apply bg-sky-100 text-sky-700 border border-sky-200; }
-  .status-pending   { @apply bg-amber-100 text-amber-700 border border-amber-200; }
-  .status-accepted  { @apply bg-emerald-100 text-emerald-700 border border-emerald-200; }
-  .status-rejected  { @apply bg-red-100 text-red-700 border border-red-200; }
+  .status-open      { @apply  text-emerald-700 border border-emerald-200; }
+  .status-closed    { @apply  text-red-700 border border-red-200; }
+  .status-completed { @apply  text-sky-700 border border-sky-200; }
+  .status-pending   { @apply  text-amber-700 border border-amber-200; }
+  .status-accepted  { @apply  text-emerald-700 border border-emerald-200; }
+  .status-rejected  { @apply  text-red-700 border border-red-200; }
 }

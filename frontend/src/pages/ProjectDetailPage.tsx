@@ -93,12 +93,7 @@ export default function ProjectDetailPage() {
   const isOpen = project.status === "open";
 
   return (
-    <div className="space-y-5 max-w-3xl">
-      {/* Back */}
-      <Link to="/projects"
-        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors">
-        <ArrowLeft className="size-4" /> Retour aux projets
-      </Link>
+    <div className="space-y-5 m-auto max-w-6xl">
 
       {/* Main card */}
       <div className="rounded-xl border border-border bg-white shadow-card overflow-hidden">
