@@ -56,31 +56,31 @@ export default function ProjectApplicationsPage() {
   const decided  = applications.filter((a) => a.status !== "pending");
 
   return (
-    <div className="space-y-5 max-w-3xl">
+    <div className="space-y-5 max-w-6xl">
       <Link
-        to={`/projects/${id}`}
-        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        to={`/my-projects`}
+        className="inline-flex items-center gap-1.5 text-lg text-muted-foreground hover:text-foreground transition-colors"
       >
-        <ArrowLeft className="size-4" /> Retour au projet
+        <ArrowLeft className="size-5" /> Retour au projet
       </Link>
 
       {project && (
         <div>
           <h2 className="text-xl font-bold">Candidatures</h2>
-          <p className="text-sm text-muted-foreground mt-0.5 line-clamp-1">{project.title}</p>
+          <p className="text-md text-muted-foreground mt-0.5 line-clamp-1">{project.title}</p>
         </div>
       )}
 
       {/* Summary */}
       <div className="grid grid-cols-3 gap-3">
         {[
-          { label: "Total",       value: applications.length,  color: "bg-primary/10 text-primary" },
-          { label: "En attente",  value: pending.length,       color: "bg-amber-100 text-amber-700" },
-          { label: "Décidées",    value: decided.length,       color: "bg-emerald-100 text-emerald-700" },
+          { label: "Total",       value: applications.length,  color: "text-primary" },
+          { label: "En attente",  value: pending.length,       color: " text-amber-700" },
+          { label: "Décidées",    value: decided.length,       color: "text-emerald-700" },
         ].map(({ label, value, color }) => (
           <div key={label} className={`rounded-xl p-4 text-center ${color} border border-current/10`}>
             <p className="text-2xl font-bold">{value}</p>
-            <p className="text-xs font-medium mt-0.5">{label}</p>
+            <p className="text-md font-medium mt-0.5">{label}</p>
           </div>
         ))}
       </div>
@@ -122,8 +122,8 @@ export default function ProjectApplicationsPage() {
           {decided.length > 0 && (
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm flex items-center gap-2">
-                  <span className="size-2 rounded-full bg-emerald-500 inline-block" />
+                <CardTitle className="text-md flex items-center gap-2">
+                  <span className="size-3 rounded-full bg-emerald-500 inline-block" />
                   Décisions prises ({decided.length})
                 </CardTitle>
               </CardHeader>
@@ -169,9 +169,9 @@ function ApplicationRow({ application: app, updating, readOnly, onAccept, onReje
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
           <div>
-            <p className="text-sm font-semibold">{app.student.full_name}</p>
-            <p className="text-xs text-muted-foreground flex items-center gap-1">
-              <Calendar className="size-3" />
+            <p className="text-lg font-semibold">{app.student.full_name}</p>
+            <p className="text-md text-muted-foreground flex items-center gap-1">
+              <Calendar className="size-5" />
               {new Date(app.applied_at).toLocaleDateString("fr-FR", {
                 day: "2-digit", month: "long", year: "numeric",
               })}
@@ -235,9 +235,9 @@ function ApplicationRow({ application: app, updating, readOnly, onAccept, onReje
       </div>
 
       {/* Motivation */}
-      <div className="rounded-lg bg-muted/50 px-3 py-2.5">
-        <p className="text-xs font-semibold text-muted-foreground mb-1">Lettre de motivation</p>
-        <p className="text-sm text-foreground/80 leading-relaxed">{app.motivation}</p>
+      <div className="rounded-lg bg-secondary/50 px-3 py-2.5">
+        <p className="text-lg font-semibold text-secondary-foreground mb-1">Lettre de motivation</p>
+        <p className="text-md text-secondary-foreground/80 leading-relaxed">{app.motivation}</p>
       </div>
     </div>
   );

@@ -11,7 +11,6 @@ import LoginPage from "@/pages/LoginPage";
 import DashboardPage           from "@/pages/DashboardPage";
 import ProjectsPage            from "@/pages/ProjectsPage";
 import ProjectDetailPage       from "@/pages/ProjectDetailPage";
-import ProjectFormPage         from "@/pages/ProjectFormPage";
 import MyProjectsPage          from "@/pages/MyProjectsPage";
 import ApplicationsPage        from "@/pages/ApplicationsPage";
 import ProjectApplicationsPage from "@/pages/ProjectApplicationsPage";
@@ -47,8 +46,6 @@ export default function App() {
 
                 {/* Enseignant */}
                 <Route element={<ProtectedRoute allowedRoles={["teacher"]} />}>
-                  <Route path="/projects/create"           element={<ProjectFormPage />} />
-                  <Route path="/projects/:id/edit"         element={<ProjectFormPage />} />
                   <Route path="/my-projects"               element={<MyProjectsPage />} />
                   <Route path="/projects/:id/applications" element={<ProjectApplicationsPage />} />
                 </Route>

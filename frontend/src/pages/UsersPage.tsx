@@ -439,10 +439,10 @@ function UserFormModal({
     <Dialog open={open} onOpenChange={(v) => { if (!v) onClose(); }}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>
+          <DialogTitle className={"text-xl"}>
             {isEdit ? "Modifier l'utilisateur" : "Créer un utilisateur"}
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription  className={"text-md"}>
             {isEdit
               ? "Modifiez les informations du compte. Laissez le mot de passe vide pour le conserver."
               : "Créez un nouveau compte. L'utilisateur devra changer son mot de passe à la première connexion."}
@@ -452,7 +452,7 @@ function UserFormModal({
         <div className="space-y-4 py-1">
           {/* Rôle — en premier pour orienter le formulaire */}
           <div className="space-y-1.5">
-            <Label>Rôle</Label>
+            <Label  className={"text-md"}>Rôle</Label>
             <div className="grid grid-cols-3 gap-2">
               {(["student", "teacher", "admin"] as UserRole[]).map((r) => {
                 const cfg = ROLE_CONFIG[r];
@@ -463,13 +463,13 @@ function UserFormModal({
                     type="button"
                     onClick={() => setForm({ ...form, role: r })}
                     className={cn(
-                      "flex flex-col items-center gap-1 rounded-lg border px-2 py-2.5 text-xs font-medium transition-all duration-150",
+                      "flex flex-col items-center gap-1 rounded-lg border px-2 py-2.5 text-md font-medium transition-all duration-150",
                       form.role === r
                         ? `border-current ${cfg.badgeClass}`
                         : "border-border text-muted-foreground hover:border-primary/50"
                     )}
                   >
-                    <Icon className="size-4" />
+                    <Icon className="size-5" />
                     {cfg.label}
                   </button>
                 );
@@ -479,9 +479,10 @@ function UserFormModal({
 
           {/* Nom complet */}
           <div className="space-y-1.5">
-            <Label htmlFor="m-name">Nom complet</Label>
+            <Label htmlFor="m-name text-md">Nom complet</Label>
             <Input
               id="m-name"
+              className = {"test-md"}
               placeholder="Jean Mbarga"
               value={form.full_name}
               error={errors.full_name}
@@ -491,12 +492,13 @@ function UserFormModal({
 
           {/* Email */}
           <div className="space-y-1.5">
-            <Label htmlFor="m-email">Email</Label>
+            <Label htmlFor="m-email text-md">Email</Label>
             <Input
               id="m-email"
               type="email"
               placeholder="jean.mbarga@univ.cm"
               value={form.email}
+              className={"text-md"}
               error={errors.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
@@ -504,7 +506,7 @@ function UserFormModal({
 
           {/* Mot de passe */}
           <div className="space-y-1.5">
-            <Label htmlFor="m-pwd">
+            <Label htmlFor="m-pwd text-md">
               Mot de passe
               {isEdit && (
                 <span className="ml-1.5 text-xs text-muted-foreground font-normal">(laisser vide = inchangé)</span>
@@ -518,12 +520,12 @@ function UserFormModal({
                 value={form.password}
                 error={errors.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
-                className="pr-10"
+                className="pr-10 text-md"
               />
               <button
                 type="button"
                 onClick={() => setShowPwd((s) => !s)}
-                className="absolute right-3 top-2.5 text-muted-foreground hover:text-foreground text-xs"
+                className="absolute right-3 top-2.5 text-muted-foreground hover:text-foreground text-md"
               >
                 {showPwd ? "Cacher" : "Voir"}
               </button>
