@@ -105,11 +105,11 @@ function TeacherDashboard() {
           <h2 className="text-xl font-bold">Mes projets</h2>
           <p className="text-md text-muted-foreground mt-0.5">Gérez vos sujets de recherche</p>
         </div>
-        <Button asChild size="lg">
-          <Link to="/projects/create">
-            <PlusCircle className="size-4" /> Nouveau projet
-          </Link>
-        </Button>
+        {/*<Button asChild size="lg">*/}
+        {/*  <Link to="/projects/create">*/}
+        {/*    <PlusCircle className="size-4" /> Nouveau projet*/}
+        {/*  </Link>*/}
+        {/*</Button>*/}
       </div>
       <center><img src="/images/dashboard.png" style={{"height":280}}/></center>
 
